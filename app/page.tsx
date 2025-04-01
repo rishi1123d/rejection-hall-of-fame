@@ -58,14 +58,14 @@ export default function Home() {
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl">
-            <Trophy className="h-6 w-6" />
-            <span>Rejection Hall of Fame</span>
+            <Trophy className="h-6 w-6 logo-icon" />
+            <span className="logo-text">Rejection Hall of Fame</span>
           </div>
           <nav className="hidden md:flex gap-8">
-            <Link href="#" className="text-foreground hover:text-secondary transition-colors font-medium">
+            <Link href="#" onClick={() => scrollToSection("home")} className="text-foreground hover:text-secondary transition-colors nav-link font-medium">
               Home
             </Link>
-            <Link href="#stories" className="text-foreground hover:text-secondary transition-colors font-medium">
+            <Link href="#stories" onClick={() => scrollToSection("stories")} className="text-foreground hover:text-secondary transition-colors nav-link font-medium">
               Stories
             </Link>
           </nav>
@@ -74,11 +74,11 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section id="home" className="w-full py-12 md:py-24 lg:py-32 bg-primary/10">
+        <section id="home" className="w-full py-12 md:py-24 lg:py-32 hero-pattern">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="space-y-4">
-                <div className="px-3 py-1 text-sm inline-flex items-center gap-1 bg-secondary text-secondary-foreground rounded-full">
+                <div className="px-3 py-1 text-sm inline-flex items-center gap-1 bg-primary text-primary-foreground rounded-full">
                   <Sparkles className="h-3.5 w-3.5" />
                   Inspiring Stories
                 </div>
@@ -117,23 +117,23 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Famous Rejection Stories
+                Famous <span className="text-secondary">Rejection</span> Stories
               </h2>
               <p className="max-w-[700px] text-muted-foreground md:text-xl">
                 These inspiring individuals faced rejection but persevered to achieve extraordinary success.
               </p>
             </div>
             
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="story-grid">
               {stories.map((story) => (
-                <Card key={story.id} className="h-full flex flex-col">
+                <Card key={story.id} className="h-full flex flex-col card-hover">
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div>
                         <CardTitle className="text-xl">{story.title}</CardTitle>
                         <CardDescription className="font-semibold mt-1">{story.person}</CardDescription>
                       </div>
-                      <div className="relative h-12 w-12 rounded-full overflow-hidden">
+                      <div className="relative h-12 w-12 rounded-full overflow-hidden person-image">
                         <Image
                           src={story.personImage || "/images/placeholder.svg"}
                           alt={story.person}
@@ -146,16 +146,16 @@ export default function Home() {
                   <CardContent className="flex-1">
                     <div className="space-y-4">
                       <div>
-                        <h4 className="font-medium text-sm text-muted-foreground">The Rejection</h4>
+                        <h4 className="font-medium text-sm text-primary">The Rejection</h4>
                         <p>{story.rejection}</p>
                       </div>
                       <div>
-                        <h4 className="font-medium text-sm text-muted-foreground">The Success</h4>
+                        <h4 className="font-medium text-sm text-secondary">The Success</h4>
                         <p>{story.success}</p>
                       </div>
                       <div className="flex items-center justify-between pt-4">
                         <span className="text-sm text-muted-foreground">{story.likes} likes</span>
-                        <span className="text-sm font-medium text-secondary">{story.category}</span>
+                        <span className="text-sm font-medium px-2 py-1 bg-accent/10 text-accent rounded-full">{story.category}</span>
                       </div>
                     </div>
                   </CardContent>
@@ -170,8 +170,8 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="flex items-center gap-2 font-bold text-xl">
-              <Trophy className="h-5 w-5" />
-              <span>Rejection Hall of Fame</span>
+              <Trophy className="h-5 w-5 logo-icon" />
+              <span className="logo-text">Rejection Hall of Fame</span>
             </div>
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Rejection Hall of Fame. All rights reserved.
